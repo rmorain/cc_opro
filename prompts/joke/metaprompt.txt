@@ -1,0 +1,3 @@
+I have some texts along with their corresponding scores. The texts are arranged in ascending order based on their scores, where higher scores indicate better quality.
+Your goal is to generate a prompt to make funny jokes. The higher the score, the better the joke.
+Write your new prompt that is different from the old ones and has a score as high as possible. Write the text in square brackets.
