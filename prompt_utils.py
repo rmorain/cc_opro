@@ -4,7 +4,7 @@ import openai
 
 
 def call_openai_server_single_prompt(
-    prompt, model="gpt-3.5-turbo", max_decode_steps=20, temperature=0.8
+    prompt, model="gpt-4o-mini", max_decode_steps=20, temperature=0.8
 ):
     """The function to call OpenAI server with an input string."""
     try:

@@ -3,3 +3,5 @@ transformers
 numpy
 pandas
 openai
+beautifulsoup4
+googlesearch-python

@@ -134,8 +134,10 @@ def is_joke_online(joke_text, num_results=5):
                     clean_page_text = re.sub(
                         r"[^\w\s]", "", page_text.replace("\n", " ")
                     ).replace(" ", "")
-                    no_space_joke = cleaned_joke.replace(" ", "")
-                    if no_space_joke in clean_page_text:
+                    super_clean_joke = re.sub(
+                        r"[^\w\s]", "", cleaned_joke.replace("\n", " ")
+                    ).replace(" ", "")
+                    if super_clean_joke in clean_page_text:
                         return True
             except Exception:  # Check next search result
                 pass

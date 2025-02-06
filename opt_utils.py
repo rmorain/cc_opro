@@ -66,6 +66,9 @@ def run_evolution(**kwargs):
             print(f"old_instructions_and_scores: {old_instructions_and_scores}")
 
         # generate new instructions
+        import pudb
+
+        pu.db
         meta_prompt = gen_meta_prompt(
             domain=domain,
             old_instructions_and_scores=old_instructions_and_scores,
@@ -116,8 +119,14 @@ def run_evolution(**kwargs):
                 domain=domain,
             )
 
-            scores = detailed_results_df.select_dtypes(include=["int"]).columns
-            average_score = np.average(scores)
+            average_score = (
+                detailed_results_df[
+                    detailed_results_df.select_dtypes(include=["int"]).columns
+                ]
+                .mean(axis=1)
+                .iloc[0]
+                .item()
+            )
             print(f"instruction: {instruction}, score: {average_score}")
             filename = eval_utils.instruction_to_filename(instruction)
             file_path = os.path.join(result_by_instruction_folder, f"{filename}.csv")
@@ -145,13 +154,13 @@ def gen_meta_prompt(
     old_instructions_and_scores = sorted(
         old_instructions_and_scores, key=lambda x: x[1]
     )[-max_num_instructions:]
-    with open(f"prompts/{domain}/meta_prompt.txt", "r") as f:
+    with open(os.path.join(os.getcwd(), f"prompts/{domain}/metaprompt.txt"), "r") as f:
         meta_prompt = f.readline()
         meta_prompt += "\n"
         for instruction, score, _ in old_instructions_and_scores:
             # filter out old instructions with low scores
-            if score < old_instruction_score_threshold:
-                continue
+            # if score < old_instruction_score_threshold:
+            #     continue
             meta_prompt += "text:"
             meta_prompt += f"{instruction}\n"
             meta_prompt += "score:"

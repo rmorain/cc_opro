@@ -12,8 +12,6 @@ import prompt_utils
 
 OPRO_ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
 
-_OPENAI_API_KEY = flags.DEFINE_string("openai_api_key", "", "The OpenAI API key.")
-
 _SCORER = flags.DEFINE_string("scorer", "gpt-4o-mini", "The name of the scorer LLM.")
 
 _OPTIMIZER = flags.DEFINE_string(
@@ -48,7 +46,6 @@ _N_ARTIFACTS = flags.DEFINE_integer(
 def main(_):
     print("Optimizing the model")
     # Parse flags
-    openai_api_key = _OPENAI_API_KEY.value
     scorer_llm_name = _SCORER.value
     optimizer_llm_name = _OPTIMIZER.value
     scorer_temp = _SCORER_TEMPERATURE.value
@@ -58,10 +55,11 @@ def main(_):
     domain = _DOMAIN.value
     n_artifacts = _N_ARTIFACTS.value
 
+    openai_api_key = os.environ.get("OPENAI_API_KEY")
+
     assert domain in {"joke", "poetry", "story", "six_words"}
 
-    # device = "cuda" if torch.cuda.is_available() else "cpu"
-    device = "cpu"
+    device = "cuda" if torch.cuda.is_available() else "cpu"
 
     # make sure the scorer and optimizer models are callable
     if scorer_llm_name in {"gpt-4o-mini", "gpt-4o"}:
@@ -70,7 +68,7 @@ def main(_):
     else:
         assert scorer_llm_name == "llama"
 
-    if optimizer_llm_name in {"gpt-3.5-turbo", "gpt-4"}:
+    if optimizer_llm_name in {"gpt-4o-mini", "gpt-4o"}:
         assert openai_api_key, "The OpenAI API key must be provided."
         openai.api_key = openai_api_key
     else:
@@ -127,7 +125,7 @@ def main(_):
             pipeline=pipe,
         )
     else:
-        assert scorer_llm_name in {"gpt-3.5-turbo", "gpt-4"}
+        assert scorer_llm_name in {"gpt-4o-mini", "gpt-4o"}
         call_scorer_server_func = functools.partial(
             prompt_utils.call_openai_server_func,
             model=scorer_llm_name,
