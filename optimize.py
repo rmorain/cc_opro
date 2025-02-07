@@ -42,6 +42,8 @@ _N_ARTIFACTS = flags.DEFINE_integer(
     "n_artifacts", 1, "The number of artifacts to generate."
 )
 
+_N_SEARCH_STEPS = flags.DEFINE_integer("steps", 200, "The number of search steps.")
+
 
 def main(_):
     print("Optimizing the model")
@@ -54,6 +56,7 @@ def main(_):
     optimizer_max_decode_steps = _OPTIMIZER_MAX_DECODE_STEPS.value
     domain = _DOMAIN.value
     n_artifacts = _N_ARTIFACTS.value
+    n_search_steps = _N_SEARCH_STEPS.value
 
     openai_api_key = os.environ.get("OPENAI_API_KEY")
 
@@ -147,7 +150,7 @@ def main(_):
     print("Finished testing the servers.")
 
     num_generated_instructions_in_each_step = 8
-    num_search_steps = 200
+    num_search_steps = n_search_steps
     old_instruction_score_threshold = 25
     initial_instructions = [
         f"Write a {domain}. The {domain} must be completely new and original to you."

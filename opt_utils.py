@@ -1,7 +1,8 @@
 import os
 import re
+import time  # Add import for time module
 
-import numpy as np
+import pandas as pd
 
 import eval_utils
 
@@ -31,6 +32,8 @@ def run_evolution(**kwargs):
     meta_prompts = []  # format: [(meta_prompt, step_index)]
     old_instruction_hashstrings_set = set()
 
+    start_time = time.time()  # Start time for the entire function
+
     # evaluate initial instructions
     print("\n============== evaluating initial instructions ===============")
     for instruction in initial_instructions:
@@ -41,6 +44,7 @@ def run_evolution(**kwargs):
             call_server_func=call_scorer_server_func,
             n_artifacts=n_artifacts,
             domain=domain,
+            i_step=-1,
         )
 
         average_score = (
@@ -59,16 +63,15 @@ def run_evolution(**kwargs):
         old_instructions_and_scores.append((instruction, average_score, -1))
         old_instructions_and_scores_raw.append((instruction, average_score, -1))
         instruction_score_dict[instruction] = average_score
+        eval_results.append((-1, instruction, detailed_results_df))
     # evolution
     for i_step in range(num_search_steps):
+        step_start_time = time.time()  # Start time for each step
         print(f"\n================== Step {i_step} =====================")
         if not i_step % 10:
             print(f"old_instructions_and_scores: {old_instructions_and_scores}")
 
         # generate new instructions
-        import pudb
-
-        pu.db
         meta_prompt = gen_meta_prompt(
             domain=domain,
             old_instructions_and_scores=old_instructions_and_scores,
@@ -82,7 +85,7 @@ def run_evolution(**kwargs):
         while remaining_instructions_to_generate > 0:
             optimizer_llm_input_text = meta_prompt
             # generate instructions
-            raw_outputs = call_optimizer_server_func(optimizer_llm_input_text)
+            raw_outputs = call_optimizer_server_func(optimizer_llm_input_text)[0]
 
             generated_instructions.append(
                 extract_string_in_square_brackets(raw_outputs)
@@ -117,6 +120,7 @@ def run_evolution(**kwargs):
                 call_server_func=call_scorer_server_func,
                 n_artifacts=n_artifacts,
                 domain=domain,
+                i_step=i_step,
             )
 
             average_score = (
@@ -135,6 +139,30 @@ def run_evolution(**kwargs):
             old_instructions_and_scores.append((instruction, average_score, i_step))
             old_instructions_and_scores_raw.append((instruction, average_score, i_step))
             instruction_score_dict[instruction] = average_score
+            eval_results.append((i_step, instruction, detailed_results_df))
+        print(
+            f"Step {i_step} completed in {time.time() - step_start_time:.2f} seconds"
+        )  # Log time for each step
+
+    # Save all instructions and scores to a csv
+    sorted_instructions = sorted(
+        old_instructions_and_scores, key=lambda x: x[1], reverse=True
+    )
+    df = pd.DataFrame(sorted_instructions, columns=["instruction", "score", "step"])
+    file_path = os.path.join(save_folder, "all_instructions_and_scores.csv")
+    df.to_csv(file_path, index=False)
+    print(f"\nall_instructions_and_scores.csv saved to {file_path}\n")
+
+    # Aggregate all artifact data
+    all_artifacts = pd.concat([result[2] for result in eval_results])
+    file_path = os.path.join(save_folder, "all_artifacts.csv")
+    all_artifacts.to_csv(file_path, index=False)
+    # Print location of all_artifacts.csv
+    print(f"\nall_artifacts.csv saved to {file_path}\n")
+
+    print(
+        f"Total time for run_evolution: {time.time() - start_time:.2f} seconds"
+    )  # Log total time
 
 
 def extract_string_in_square_brackets(input_string):

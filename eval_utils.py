@@ -5,7 +5,7 @@ import re
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-from googlesearch import search
+from googleapiclient.discovery import build
 
 RATINGS = {
     "strongly disagree": 0,
@@ -21,6 +21,7 @@ def evaluate_single_instruction(
     call_server_func=None,
     n_artifacts=1,
     domain="joke",
+    i_step=None,
 ):
     # Generate n artifacts
     artifacts = []
@@ -31,8 +32,10 @@ def evaluate_single_instruction(
     results = evaluate_artifacts(artifacts, call_server_func, domain)
     # Make a dataframe
     df = pd.DataFrame(results)
+    df["step"] = f"Step {i_step}"
+    df["instruction"] = instruction
     # Assuming 'artifact' and 'domain' should be first
-    fixed_columns = ["artifact", "domain"]
+    fixed_columns = ["step", "instruction", "artifact", "domain"]
     other_columns = [col for col in df.columns if col not in fixed_columns]
     df = df[fixed_columns + other_columns]
     return df
@@ -41,20 +44,27 @@ def evaluate_single_instruction(
 def evaluate_artifacts(artifacts, call_server_func, domain):
     results = []
     for artifact in artifacts:
+        if len(artifact) > 500:
+            print("Artifact too long, skipped")
+            result = get_zero_score_result(artifact, domain, "too long")
         if not is_joke_online(artifact):
             result = evaluate_artifact(artifact, call_server_func, domain)
         else:
             # Assign a score of 0 for each category if the joke is online
-            eval_dir = f"prompts/{domain}/evals"
-            evals_files = os.listdir(eval_dir)
-            categories = [eval_file.split(".")[0] for eval_file in evals_files]
-            category_scores = {category: 0 for category in categories}
-            category_scores["artifact"] = artifact
-            category_scores["domain"] = domain
-            category_scores["online"] = True
-            result = category_scores
+            result = get_zero_score_result(artifact, domain, "online")
         results.append(result)
     return results
+
+
+def get_zero_score_result(artifact, domain, reason):
+    eval_dir = f"prompts/{domain}/evals"
+    evals_files = os.listdir(eval_dir)
+    categories = [eval_file.split(".")[0] for eval_file in evals_files]
+    category_scores = {category: 0 for category in categories}
+    category_scores["artifact"] = artifact
+    category_scores["domain"] = domain
+    category_scores["valid"] = f"Invalid: {reason}"
+    return category_scores
 
 
 def evaluate_artifact(artifact, call_server_func, domain):
@@ -81,7 +91,7 @@ def evaluate_artifact(artifact, call_server_func, domain):
     category_scores = dict(zip(categories, scores))
     category_scores["artifact"] = artifact
     category_scores["domain"] = domain
-    category_scores["online"] = False
+    category_scores["valid"] = "Valid"
     return category_scores
 
 
@@ -102,9 +112,15 @@ def process_result(result):
 def instruction_to_filename(instruction):
     """Convert an instruction string to filename."""
     m = hashlib.md5()
-    m.update(instruction.encode("ascii"))
+    m.update(instruction.encode("ascii", "ignore"))  # ignore non-ASCII characters
     filename = m.hexdigest()
     return filename
+
+
+def google_search(search_term, api_key, cse_id, **kwargs):
+    service = build("customsearch", "v1", developerKey=api_key)
+    res = service.cse().list(q=search_term, cx=cse_id, **kwargs).execute()
+    return res.get("items", [])
 
 
 def is_joke_online(joke_text, num_results=5):
@@ -116,17 +132,28 @@ def is_joke_online(joke_text, num_results=5):
 
     try:
         # Search Google
-        search_results = list(search(f'"{cleaned_joke}"', num_results=num_results))
+        search_results = google_search(
+            cleaned_joke,
+            api_key=os.environ.get("GOOGLE_API"),
+            cse_id=os.environ.get("SEARCH_ID"),
+            num=num_results,
+        )
+
         # Convert iterator to list to check if any results exist
-        if len(search_results[0]) == 0:
+        if not search_results:
             return False
 
         # Verify the joke is actually on the web page
         for result in search_results:
-            if not validate_url(result):
+            link = result.get("link")
+            if not validate_url(link):
                 continue
             try:
-                response = requests.get(result)
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...",
+                    "Accept-Language": "en-US,en;q=0.9",
+                }
+                response = requests.get(link, headers=headers, timeout=5)
                 if response.status_code == 200:
                     soup = BeautifulSoup(response.content, "html.parser")
                     page_text = soup.get_text().lower()
