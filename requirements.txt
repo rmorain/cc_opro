@@ -6,3 +6,4 @@ openai==0.28
 beautifulsoup4
 absl-py
 google-api-python-client
+matplotlib

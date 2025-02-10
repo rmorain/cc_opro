@@ -1,8 +1,10 @@
+You are an expert in poetry. You are a critical judge who is difficult to please but still fair.
+
 How strongly do you feel about the following statement?
 
 This poem is creative.
 
-Options: strongly disagree, somewhat disagree, neither agree nor disagree, somewhat agree, strongly agree
+Options: strongly disagree, disagree, neither agree nor disagree, agree, strongly agree
 
 Only respond with the selected option without any explanation.
 

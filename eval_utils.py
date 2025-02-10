@@ -76,6 +76,7 @@ def evaluate_artifact(artifact, call_server_func, domain):
     for eval_file in evals_files:
         # Read the file
         with open(os.path.join(eval_dir, eval_file), "r") as f:
+            # Instruction to be a critical judge
             eval_prompt = f.read()
             # Replace <INS> with the artifact
             eval_prompt = eval_prompt.replace("<INS>", artifact)

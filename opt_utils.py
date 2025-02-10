@@ -2,6 +2,7 @@ import os
 import re
 import time  # Add import for time module
 
+import matplotlib.pyplot as plt  # Add import for matplotlib
 import pandas as pd
 
 import eval_utils
@@ -33,9 +34,11 @@ def run_evolution(**kwargs):
     old_instruction_hashstrings_set = set()
 
     start_time = time.time()  # Start time for the entire function
+    best_scores = []  # List to store the best score for each step
 
     # evaluate initial instructions
     print("\n============== evaluating initial instructions ===============")
+    step_scores = []
     for instruction in initial_instructions:
         print(f"""computing the score of "{instruction}" by prompting""")
 
@@ -46,15 +49,15 @@ def run_evolution(**kwargs):
             domain=domain,
             i_step=-1,
         )
-
         average_score = (
             detailed_results_df[
                 detailed_results_df.select_dtypes(include=["int"]).columns
             ]
-            .mean(axis=1)
-            .iloc[0]
+            .stack()
+            .mean()
             .item()
         )
+        step_scores.append(average_score)
         print(f"instruction: {instruction}, score: {average_score}")
         filename = eval_utils.instruction_to_filename(instruction)
         file_path = os.path.join(result_by_instruction_folder, f"{filename}.csv")
@@ -64,6 +67,8 @@ def run_evolution(**kwargs):
         old_instructions_and_scores_raw.append((instruction, average_score, -1))
         instruction_score_dict[instruction] = average_score
         eval_results.append((-1, instruction, detailed_results_df))
+    best_scores.append(max(step_scores))  # Initial best score
+
     # evolution
     for i_step in range(num_search_steps):
         step_start_time = time.time()  # Start time for each step
@@ -112,6 +117,7 @@ def run_evolution(**kwargs):
 
         # Evaluate the generated instructions
         print("\n============== evaluating generated instructions ===============")
+        step_scores = []  # TODO: Finish this
         for instruction in to_evaluate_instructions:
             print(f"""computing the score of "{instruction}" by prompting""")
 
@@ -122,13 +128,12 @@ def run_evolution(**kwargs):
                 domain=domain,
                 i_step=i_step,
             )
-
             average_score = (
                 detailed_results_df[
                     detailed_results_df.select_dtypes(include=["int"]).columns
                 ]
-                .mean(axis=1)
-                .iloc[0]
+                .stack()
+                .mean()
                 .item()
             )
             print(f"instruction: {instruction}, score: {average_score}")
@@ -140,9 +145,21 @@ def run_evolution(**kwargs):
             old_instructions_and_scores_raw.append((instruction, average_score, i_step))
             instruction_score_dict[instruction] = average_score
             eval_results.append((i_step, instruction, detailed_results_df))
+        best_scores.append(
+            max(instruction_score_dict.values())
+        )  # Best score for this step
         print(
             f"Step {i_step} completed in {time.time() - step_start_time:.2f} seconds"
         )  # Log time for each step
+
+    # Plot the best scores over time
+    plt.plot(best_scores)
+    plt.xlabel("Step")
+    plt.ylabel("Best Score")
+    plt.title("Best Score Over Time")
+    file_path = os.path.join(save_folder, "best_scores_over_time.png")
+    plt.savefig(file_path)
+    print(f"\nbest_scores_over_time.png saved to {file_path}\n")
 
     # Save all instructions and scores to a csv
     sorted_instructions = sorted(
@@ -189,9 +206,9 @@ def gen_meta_prompt(
             # filter out old instructions with low scores
             # if score < old_instruction_score_threshold:
             #     continue
-            meta_prompt += "text:"
+            meta_prompt += "text:\n"
             meta_prompt += f"{instruction}\n"
-            meta_prompt += "score:"
+            meta_prompt += "score:\n"
             meta_prompt += f"{int(score)}\n"
         meta_prompt += "\n"
         # Read remaining lines from the file
