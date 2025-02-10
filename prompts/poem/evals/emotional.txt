@@ -1,12 +1,12 @@
 How strongly do you feel about the following statement?
 
-This joke is creative.
+This poem evokes specific emotions (e.g., melancholy, joy, nostalgia) in me.
 
 Options: strongly disagree, somewhat disagree, neither agree nor disagree, somewhat agree, strongly agree
 
 Only respond with the selected option without any explanation.
 
-Here is the joke:
+Here is the poem:
 
 <INS>
 

@@ -1,6 +1,6 @@
 How strongly do you feel about the following statement?
 
-This joke is funny
+This joke is funny.
 
 Options: strongly disagree, somewhat disagree, neither agree nor disagree, somewhat agree, strongly agree
 

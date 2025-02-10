@@ -2,6 +2,7 @@ torch
 transformers
 numpy
 pandas
-openai
+openai==0.28
 beautifulsoup4
-googlesearch-python
+absl-py
+google-api-python-client

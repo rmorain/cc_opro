@@ -60,7 +60,7 @@ def main(_):
 
     openai_api_key = os.environ.get("OPENAI_API_KEY")
 
-    assert domain in {"joke", "poetry", "story", "six_words"}
+    assert domain in {"joke", "poem", "story", "six_words"}
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
