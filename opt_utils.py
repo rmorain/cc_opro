@@ -151,6 +151,23 @@ def run_evolution(**kwargs):
         else:
             print(f"Warning: No valid scores for step {i_step}")
             best_scores.append(0)  # or another suitable default value
+
+        # Save metaprompts to a file
+        meta_prompt_filename = os.path.join(save_folder, f"metaprompt_{i_step}.txt")
+        with open(meta_prompt_filename, "w") as f:
+            f.write(meta_prompt)
+        print(f"Meta prompt saved to {meta_prompt_filename}")
+        # Save old instructions and scores to a file
+        old_instructions_and_scores_filename = os.path.join(
+            save_folder, f"old_instructions_and_scores_{i_step}.txt"
+        )
+        with open(old_instructions_and_scores_filename, "w") as f:
+            for instruction, score, step in old_instructions_and_scores:
+                f.write(f"{instruction}\t{score}\t{step}\n")
+        print(
+            f"Old instructions and scores saved to {old_instructions_and_scores_filename}"
+        )
+
         print(
             f"Step {i_step} completed in {time.time() - step_start_time:.2f} seconds"
         )  # Log time for each step
