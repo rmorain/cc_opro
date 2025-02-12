@@ -19,7 +19,7 @@ def call_openai_server_single_prompt(
         return completion.choices[0].message.content
 
     except openai.error.Timeout as e:
-        retry_time = e.retry_after if hasattr(e, "retry_after") else 30
+        retry_time = e.retry_after if hasattr(e, "retry_after") else 5
         print(f"Timeout error occurred. Retrying in {retry_time} seconds...")
         time.sleep(retry_time)
         return call_openai_server_single_prompt(
@@ -27,7 +27,7 @@ def call_openai_server_single_prompt(
         )
 
     except openai.error.RateLimitError as e:
-        retry_time = e.retry_after if hasattr(e, "retry_after") else 30
+        retry_time = e.retry_after if hasattr(e, "retry_after") else 5
         print(f"Rate limit exceeded. Retrying in {retry_time} seconds...")
         time.sleep(retry_time)
         return call_openai_server_single_prompt(
@@ -35,7 +35,7 @@ def call_openai_server_single_prompt(
         )
 
     except openai.error.APIError as e:
-        retry_time = e.retry_after if hasattr(e, "retry_after") else 30
+        retry_time = e.retry_after if hasattr(e, "retry_after") else 5
         print(f"API error occurred. Retrying in {retry_time} seconds...")
         time.sleep(retry_time)
         return call_openai_server_single_prompt(
@@ -43,7 +43,7 @@ def call_openai_server_single_prompt(
         )
 
     except openai.error.APIConnectionError as e:
-        retry_time = e.retry_after if hasattr(e, "retry_after") else 30
+        retry_time = e.retry_after if hasattr(e, "retry_after") else 5
         print(f"API connection error occurred. Retrying in {retry_time} seconds...")
         time.sleep(retry_time)
         return call_openai_server_single_prompt(
@@ -51,7 +51,7 @@ def call_openai_server_single_prompt(
         )
 
     except openai.error.ServiceUnavailableError as e:
-        retry_time = e.retry_after if hasattr(e, "retry_after") else 30
+        retry_time = e.retry_after if hasattr(e, "retry_after") else 5
         print(f"Service unavailable. Retrying in {retry_time} seconds...")
         time.sleep(retry_time)
         return call_openai_server_single_prompt(

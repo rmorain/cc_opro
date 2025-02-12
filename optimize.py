@@ -9,6 +9,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
 import opt_utils
 import prompt_utils
+from eval_utils import ARTIFACT_LENGTH_LIMIT
 
 OPRO_ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -60,7 +61,7 @@ def main(_):
 
     openai_api_key = os.environ.get("OPENAI_API_KEY")
 
-    assert domain in {"joke", "poem", "story", "six_words"}
+    assert domain in {"joke", "poem", "story", "six-word"}
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -149,11 +150,11 @@ def main(_):
     print(f"optimizer test output: {optimizer_test_output}")
     print("Finished testing the servers.")
 
-    num_generated_instructions_in_each_step = 8
+    num_generated_instructions_in_each_step = 4
     num_search_steps = n_search_steps
     old_instruction_score_threshold = 25
     initial_instructions = [
-        f"Write a {domain}. The {domain} must be completely new and original to you."
+        f"Write a {domain}. The {domain} must be completely new and original to you. The {domain} must be less than {ARTIFACT_LENGTH_LIMIT[domain]} characters long.",
     ]
     max_num_instructions = (
         20  # the maximum number of instructions and scores in the meta-prompt
@@ -169,7 +170,7 @@ def main(_):
     save_folder = os.path.join(
         OPRO_ROOT_PATH,
         "outputs",
-        "optimization-results",
+        domain,
         f"s-{scorer_llm_name}-o-{optimizer_llm_name}-{datetime_str}/",
     )
     result_by_instruction_folder = os.path.join(save_folder, "result_by_instruction")

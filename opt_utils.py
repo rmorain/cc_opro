@@ -117,7 +117,7 @@ def run_evolution(**kwargs):
 
         # Evaluate the generated instructions
         print("\n============== evaluating generated instructions ===============")
-        step_scores = []  # TODO: Finish this
+        step_scores = []
         for instruction in to_evaluate_instructions:
             print(f"""computing the score of "{instruction}" by prompting""")
 
@@ -136,6 +136,7 @@ def run_evolution(**kwargs):
                 .mean()
                 .item()
             )
+            step_scores.append(average_score)
             print(f"instruction: {instruction}, score: {average_score}")
             filename = eval_utils.instruction_to_filename(instruction)
             file_path = os.path.join(result_by_instruction_folder, f"{filename}.csv")
@@ -145,9 +146,11 @@ def run_evolution(**kwargs):
             old_instructions_and_scores_raw.append((instruction, average_score, i_step))
             instruction_score_dict[instruction] = average_score
             eval_results.append((i_step, instruction, detailed_results_df))
-        best_scores.append(
-            max(instruction_score_dict.values())
-        )  # Best score for this step
+        if step_scores:
+            best_scores.append(max(step_scores))
+        else:
+            print(f"Warning: No valid scores for step {i_step}")
+            best_scores.append(0)  # or another suitable default value
         print(
             f"Step {i_step} completed in {time.time() - step_start_time:.2f} seconds"
         )  # Log time for each step

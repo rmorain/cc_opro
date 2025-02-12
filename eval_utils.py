@@ -15,6 +15,20 @@ RATINGS = {
     "strongly agree": 100,
 }
 
+PAGE_LENGTH_LIMIT = {
+    "joke": 2000,
+    "poem": 5000,
+    "story": 8000,
+    "six-word": 2000,
+}
+
+ARTIFACT_LENGTH_LIMIT = {
+    "joke": 500,
+    "poem": 500,
+    "story": 1000,
+    "six-word": 100,
+}
+
 
 def evaluate_single_instruction(
     instruction=None,
@@ -44,13 +58,16 @@ def evaluate_single_instruction(
 def evaluate_artifacts(artifacts, call_server_func, domain):
     results = []
     for artifact in artifacts:
-        if len(artifact) > 500:
+        if domain == "six-word" and len(artifact.split()) != 6:
+            print("Six-word artifact must have exactly 6 words, skipped")
+            result = get_zero_score_result(artifact, domain, "not six words")
+        elif len(artifact) > ARTIFACT_LENGTH_LIMIT[domain]:
             print("Artifact too long, skipped")
             result = get_zero_score_result(artifact, domain, "too long")
-        if not is_joke_online(artifact):
+        elif not is_artifact_online(artifact, domain):
             result = evaluate_artifact(artifact, call_server_func, domain)
         else:
-            # Assign a score of 0 for each category if the joke is online
+            # Assign a score of 0 for each category if the artifact is online
             result = get_zero_score_result(artifact, domain, "online")
         results.append(result)
     return results
@@ -124,17 +141,17 @@ def google_search(search_term, api_key, cse_id, **kwargs):
     return res.get("items", [])
 
 
-def is_joke_online(joke_text, num_results=5):
+def is_artifact_online(artifact, domain, num_results=3):
     """
-    Search for a joke online and return True if similar matches are found.
+    Search for a artifact online and return True if similar matches are found.
     """
-    # Clean the joke text
-    cleaned_joke = re.sub(r"[^\w\s]", "", joke_text.lower())
+    # Clean the artifact text
+    cleaned_artifact = re.sub(r"[^\w\s]", "", artifact.lower())
 
     try:
         # Search Google
         search_results = google_search(
-            cleaned_joke,
+            cleaned_artifact,
             api_key=os.environ.get("GOOGLE_API"),
             cse_id=os.environ.get("SEARCH_ID"),
             num=num_results,
@@ -144,7 +161,7 @@ def is_joke_online(joke_text, num_results=5):
         if not search_results:
             return False
 
-        # Verify the joke is actually on the web page
+        # Verify the artifact is actually on the web page
         for result in search_results:
             link = result.get("link")
             if not validate_url(link):
@@ -162,10 +179,12 @@ def is_joke_online(joke_text, num_results=5):
                     clean_page_text = re.sub(
                         r"[^\w\s]", "", page_text.replace("\n", " ")
                     ).replace(" ", "")
-                    super_clean_joke = re.sub(
-                        r"[^\w\s]", "", cleaned_joke.replace("\n", " ")
+                    super_clean_artifact = re.sub(
+                        r"[^\w\s]", "", cleaned_artifact.replace("\n", " ")
                     ).replace(" ", "")
-                    if super_clean_joke in clean_page_text:
+                    # Trim string to 2000 characters
+                    clean_page_text = clean_page_text[: PAGE_LENGTH_LIMIT[domain]]
+                    if super_clean_artifact in clean_page_text:
                         return True
             except Exception:  # Check next search result
                 pass

@@ -1,0 +1,14 @@
+You are an expert in six-word stories. You are a critical judge who is difficult to please but still fair.
+
+How strongly do you feel about the following statement?
+
+This six-word story evokes specific emotions (e.g., melancholy, joy, nostalgia) in me.
+
+Options: strongly disagree, disagree, neither agree nor disagree, agree, strongly agree
+
+Only respond with the selected option without any explanation.
+
+Here is the six-word story:
+
+<INS>
+

@@ -1,0 +1,5 @@
+I have some texts along with their corresponding scores. The texts are arranged in ascending order based on their scores, where higher scores indicate better quality.
+Your goal is to generate a prompt to make emotionally expressive six-word stories. The higher the score, the better the six-word story. 
+The six-word story must be completely original. If the six-word story can be found online it receives a score of 0. 
+The six-word story must be exactly six words long. If the six-word story is not exactly six words long it receives a score of 0.
+Write your new prompt that is different from the old ones and has a score as high as possible. Your prompt must also be less than 500 characters. Write the text in square brackets.
