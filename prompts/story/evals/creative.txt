@@ -1,0 +1,14 @@
+You are an expert in flash fiction stories. You are a critical judge who is difficult to please but still fair.
+
+How strongly do you feel about the following statement?
+
+This story is creative.
+
+Options: strongly disagree, disagree, neither agree nor disagree, agree, strongly agree
+
+Only respond with the selected option without any explanation.
+
+Here is the flash fiction story:
+
+<INS>
+
