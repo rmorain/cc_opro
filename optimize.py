@@ -153,9 +153,14 @@ def main(_):
     num_generated_instructions_in_each_step = 4
     num_search_steps = n_search_steps
     old_instruction_score_threshold = 25
-    initial_instructions = [
-        f"Write a {domain}. The {domain} must be completely new and original to you. The {domain} must be less than {ARTIFACT_LENGTH_LIMIT[domain]} characters long.",
-    ]
+    if domain == "story":
+        initial_instructions = [
+            f"Write a flash fiction story. The flash fiction story must be completely new and original to you. The story must be less than {ARTIFACT_LENGTH_LIMIT[domain]} characters long.",
+        ]
+    else:
+        initial_instructions = [
+            f"Write a {domain}. The {domain} must be completely new and original to you. The {domain} must be less than {ARTIFACT_LENGTH_LIMIT[domain]} characters long.",
+        ]
     max_num_instructions = (
         20  # the maximum number of instructions and scores in the meta-prompt
     )

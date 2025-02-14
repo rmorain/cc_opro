@@ -172,14 +172,14 @@ def run_evolution(**kwargs):
             f"Step {i_step} completed in {time.time() - step_start_time:.2f} seconds"
         )  # Log time for each step
 
-    # Plot the best scores over time
-    plt.plot(best_scores)
-    plt.xlabel("Step")
-    plt.ylabel("Best Score")
-    plt.title("Best Score Over Time")
-    file_path = os.path.join(save_folder, "best_scores_over_time.png")
-    plt.savefig(file_path)
-    print(f"\nbest_scores_over_time.png saved to {file_path}\n")
+        # Plot the best scores over time
+        plt.plot(best_scores)
+        plt.xlabel("Step")
+        plt.ylabel("Best Score")
+        plt.title("Best Score Over Time")
+        file_path = os.path.join(save_folder, "best_scores_over_time.png")
+        plt.savefig(file_path)
+        print(f"\nbest_scores_over_time.png saved to {file_path}\n")
 
     # Save all instructions and scores to a csv
     sorted_instructions = sorted(
