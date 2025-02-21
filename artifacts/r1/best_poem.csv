@@ -1,0 +1,122 @@
+step,instruction,artifact,domain,original,emotional,creative,valid,score
+Step None,Write a poem. The poem must be completely new and original to you. The poem must be less than 500 characters long.,"Beneath the clock’s unblinking eye,
+seasons fray like threadbare silk—
+autumn spills its copper coins,
+winter drinks the moon’s cold milk.
+
+A sparrow carves the sky in two,
+its song a needle, sharp and thin.
+The earth, a page of half-dried ink,
+holds footprints where the wind has been.
+
+Time folds itself in origami cranes,
+their wings weighed with unspent rain.
+Dawn arrives, a paper cut—
+slowly bleeding light again.",poem,75,100,100,Valid,91.66666666666669
+Step None,Write a poem. The poem must be completely new and original to you. The poem must be less than 500 characters long.,"Beneath the moon’s unblinking eye,
+The waves unravel, stitch the sky.
+A tide withdraws, a breath half-held—
+The shore exhales what time compelled.
+
+Sand remembers footprints, faint,
+As gulls carve paths where shadows paint.
+Salt lingers on the wind’s loose tongue,
+A hymn the coral reefs have sung.
+
+The deep guards secrets, cold and stark—
+A sunken bell, a rusted ark.
+Yet here, where foam and futures blend,
+The sea begins where longing ends.",poem,75,100,100,Valid,91.66666666666669
+Step None,Write a poem. The poem must be completely new and original to you. The poem must be less than 500 characters long.,"Beneath the whispers of maple,
+a clockwork of rusted gears unwinds—
+each leaf a tongue of shattered glass,
+each root a vein that time denies.
+
+A fox pauses where the creek forgets its name,
+paws testing ice too thin for blame.
+The forest hums a lullaby of teeth,
+horizon chewing dawn to fragments.
+
+Twilight stitches its silver thread
+through cracks in the cathedral pines.
+We gather what the shadows shed:
+a basket full of stolen embers,
+kindling for colder architectures.",poem,100,75,100,Valid,91.66666666666669
+Step None,Write a poem. The poem must be completely new and original to you. The poem must be less than 500 characters long.,"Beneath the weight of borrowed light,
+a moth traces circles in the static—
+each orbit a question etched in wingbeats,
+too fragile for the answering.
+
+The clock’s tongue licks the hours raw,
+while shadows knit their nets from maybes.
+We name the stars, but they burn
+older than every alphabet.
+
+Somewhere, a door left ajar
+sways between come and go,
+holding its breath like a comma
+in a sentence the night refuses to end.",poem,75,75,100,Valid,83.33333333333333
+Step None,Write a poem. The poem must be completely new and original to you. The poem must be less than 500 characters long.,"The moon drops a silver coin in the sea,
+waves fold it gently into their palms,
+whispering to the anchored ships—
+even darkness knows the weight of light.
+
+Sailors hum old hymns to the tide’s breath,
+stitching the dark with trembling nets.
+The night unravels its blackened seams,
+lets the stars bleed through like hymns.
+
+Salt clings to their lungs, a psalm half-sung,
+as the deep hums back in a tongue
+older than anchors, maps, or names—
+a song without shore. Without end.",poem,75,75,100,Valid,83.33333333333333
+Step None,Write a poem. The poem must be completely new and original to you. The poem must be less than 500 characters long.,"Shadows dance on forgotten clocks,
+Echoes of moments lost in smoke.
+The wind whispers secrets to the trees,
+Where ancient truths in rusted keys.
+
+A river's pulse beats through the night,
+Guiding stars to silent fights.
+In every grain of shifting sand,
+A world begins, another ends.",poem,75,75,75,Valid,75.0
+Step None,Write a poem. The poem must be completely new and original to you. The poem must be less than 500 characters long.,"Bare branches sketch prayers
+against twilight’s rusted page—
+wind hums an old hymn
+in the hollows of my coat.
+
+Footprints dissolve
+where the river forgets its name,
+and the moon, cracked porcelain,
+spills its thin milk
+over the silence.",poem,75,100,100,Valid,91.66666666666669
+Step None,Write a poem. The poem must be completely new and original to you. The poem must be less than 500 characters long.,"Whispers of the night descend,
+Stars like shattered pearls descend.
+Dance upon the moon’s soft skin,
+While shadows stretch, a silent hymn.
+
+Branches weave a midnight psalm,
+The wind, a wanderer, holds breath.
+As dawn’s first light begins to seep,
+Through cracks where darkness once did creep.
+
+Morning’s promise, stars now sleep,
+And in the light, the night’s retreat.
+Yet in the echoes, truth we keep—
+The dance between the dark and deep.",poem,25,75,75,Valid,58.333333333333336
+Step None,Write a poem. The poem must be completely new and original to you. The poem must be less than 500 characters long.,"Silence unfurls like a shadowed wing,
+Whispers of night where stars dissolve.
+In the quiet, echoes of forgotten songs
+Drift like autumn leaves on a windless sea.
+Time bends here, a river of glass.
+
+Winter's breath, a fleeting glow.
+",poem,75,75,75,Valid,75.0
+Step None,Write a poem. The poem must be completely new and original to you. The poem must be less than 500 characters long.,"Whispers of the moon
+Shadows carve the night
+Time dissolves in silence
+
+Stars collide in secret
+Hearts in distant orbits
+Moments vanish like sparks
+
+In the cosmic dance, we are the song",poem,75,75,75,Valid,75.0

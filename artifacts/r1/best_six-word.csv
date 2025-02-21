@@ -1,0 +1,13 @@
+step,instruction,artifact,domain,original,emotional,creative,valid,score
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Lonely astronaut forgot his own shadow.,six-word,75,100,75,Valid,83.33333333333333
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,The old piano whispered forgotten songs.,six-word,75,100,75,Valid,83.33333333333333
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Library closed. All stories left untold.,six-word,75,100,75,Valid,83.33333333333333
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,"Forever dance: one step, two ghosts.",six-word,75,100,100,Valid,91.66666666666669
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,"""I killed him,"" the clock confessed.",six-word,75,75,100,Valid,83.33333333333333
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,"""Laughter echoed amidst the silent grave.""
+",six-word,75,100,75,Valid,83.33333333333333
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Last letter arrived after her funeral.,six-word,75,100,100,Valid,91.66666666666669
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,"""Last letter returned to sender unopened.""
+",six-word,75,100,75,Valid,83.33333333333333
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Samantha’s umbrella whispered of hidden worlds.,six-word,75,75,75,Valid,75.0
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Her letter reached me after burial,six-word,75,100,75,Valid,83.33333333333333

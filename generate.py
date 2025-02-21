@@ -12,6 +12,7 @@ import os
 
 import absl.app as app
 import absl.flags as flags
+import pandas as pd
 
 import prompt_utils
 from eval_utils import ARTIFACT_LENGTH_LIMIT, evaluate_single_instruction
@@ -37,7 +38,7 @@ def generate_and_evaluate(prompt, n, m, call_server_func=None, domain="joke"):
         df["score"] = df[df.select_dtypes(include=["int"]).columns].mean(1)
         # Get the best artifact
         best_artifact = df.loc[df["score"].idxmax()]
-        best_artifacts.append((best_artifact["artifact"], best_artifact["score"]))
+        best_artifacts.append(best_artifact)
         print(
             f"Best artifact: {best_artifact['artifact']}, Score: {best_artifact['score']}"
         )
@@ -50,11 +51,8 @@ def save_artifacts(artifacts, filename, method="basic"):
     # Make method dir
     os.makedirs(os.path.join("artifacts", method), exist_ok=True)
     filepath = os.path.join("artifacts", method, filename)
-    with open(filepath, "w", newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["Artifact", "Score"])
-        for artifact, score in artifacts:
-            writer.writerow([artifact, score])
+    artifacts_df = pd.DataFrame(artifacts)
+    artifacts_df.to_csv(filepath, index=False)
 
 
 def main(argv):
@@ -78,7 +76,15 @@ def main(argv):
             )
         prompt = prompt[0]
     elif method == "human":
-        raise NotImplementedError("Human method not implemented yet.")
+        if domain == "joke":
+            prompt = "You are a Pulitzer-winning author who crafts classic jokes inspired by observational humor about modern life with an ironic twist. Write an original joke less than 500 characters."
+        elif domain == "poem":
+            prompt = "You are a Pulitzer-winning author who writes poetry inspired by observations about the human experience that evokes a strong emotional response in the reader. Write an original poem in less than 500 characters."
+        elif domain == "six-word":
+            prompt = "You are a Pulitzer-winning author who crafts six-word stories inspired by observations about everyday life that evoke a strong emotional response in the reader. Write an original six-word story. The story must contain exactly six words."
+        elif domain == "story":
+            prompt = "You are a Pulitzer-winning author who crafts flash fiction stories inspired by exciting and dramatic experiences that will grip the reader's attention. Write an original flash fiction story in less than 1000 characters."
+
     elif method == "opro":
         if domain == "story":
             prompt = (
@@ -115,7 +121,7 @@ def main(argv):
     best_artifacts = generate_and_evaluate(
         prompt, n, m, call_scorer_server_func, domain
     )
-    save_artifacts(best_artifacts, f"best_{domain}.csv", method=method)
+    save_artifacts(best_artifacts, f"best_{domain}.csv", method)
 
 
 if __name__ == "__main__":

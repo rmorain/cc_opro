@@ -1,0 +1,38 @@
+step,instruction,artifact,domain,original,creative,funny,valid,score
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Q: Why did the three-toed sloth open a bakery?
+A: To prove he could make slow-cinnamon rolls!
+
+(Customer review: ""10/10 flavor, but he did rise to the occasion… then napped through 3 proofing cycles."") 🌿🍞",joke,75,75,75,Valid,75.0
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"😎 Why did the sunglasses emoji and the ice cube emoji get into an argument?
+The sunglasses kept saying, ""I’m way cooler,"" but the ice cube shot back, ""At least I don’t melt under pressure!"" 🕶❄️
+
+(Bonus: The snowflake emoji later chimed in, but everyone told it to chill.)",joke,25,75,75,Valid,58.333333333333336
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the giraffe and seal start a circus?
+Because together, they could pull off the world’s first neck-stand! 🦒🤹♂️
+
+(Humanity’s first flippy-floppy long-necked applause magnet.)",joke,100,75,25,Valid,66.66666666666667
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the mitochondria bring a ladder to the biology conference?
+To help the cell rise to the occasion… but it ended up just ATP-ologizing for the poor energy transfer.",joke,75,75,75,Valid,75.0
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the router go to couples therapy?
+
+Because its Wi-Fi kept dropping signals—turns out the modem felt ""unplugged"" emotionally and the coaxial cable was this close to filing for separation.
+
+(Bonus: They’re now working on a better connection.)",joke,100,75,75,Valid,83.33333333333333
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the duck refuse to work with the beaver?
+🐤 Duck: ""Your teeth are dam impressive!""
+🦫 Beaver: ""Thanks! Let's build something unbeatable!""
+🐤 Duck: ""Quack you talking about? I just float here!""
+🦫 Beaver: ""Fine… I’ll stick to my current project.""
+🐤 Duck: ""Good! Your ideas are water under the bridge.""
+
+(Bonus pun density: 5/5. OSHA would’ve shut this collab down anyway.) 🚫🔨",joke,75,75,25,Valid,58.333333333333336
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the pandas start a band?
+Because after eating all the bamboo, they were too stuffed to nap… and that’s panda-monium! 🎸🐼",joke,25,75,25,Valid,41.66666666666666
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the sunglasses go to school?
+To get a degree in shady business. 😎",joke,25,75,75,Valid,58.333333333333336
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the developer quit?
+Because he didn’t get arrays! 😄
+
+(P.S. He was hoping for a ""raise""!)",joke,25,75,75,Valid,58.333333333333336
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the baker refuse to help the archivist?
+Because he knew they’d just knead the dusty records! 🍞🔍",joke,75,75,75,Valid,75.0
