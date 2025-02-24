@@ -1,0 +1,11 @@
+step,instruction,artifact,domain,original,emotional,creative,valid,score
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Lost keys found; wrong house entered.,six-word,75,75,75,Valid,75.0
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Lighthouse abandoned; waves whisper forgotten secrets.,six-word,75,75,75,Valid,75.0
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Shadows stretched; sunrise revealed hidden secrets.,six-word,75,75,75,Valid,75.0
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,"Abandoned kite, tangled dreams in trees.",six-word,75,100,75,Valid,83.33333333333333
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,"Lost map, empty compass, endless journey.",six-word,75,100,75,Valid,83.33333333333333
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,"Lost map, found destiny in chaos.",six-word,75,75,75,Valid,75.0
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Abandoned suitcase whispered secrets of adventures.,six-word,75,75,75,Valid,75.0
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Forgotten dreams whispered through closed windows.,six-word,75,75,75,Valid,75.0
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Lighthouse stood; waves claimed the village.,six-word,75,75,75,Valid,75.0
+Step None,Write a six-word story. The six-word story must be completely new and original to you. The six-word story must be exactly six words long.,Sunset whispers secrets only night understands.,six-word,25,75,75,Valid,58.333333333333336

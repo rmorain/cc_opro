@@ -1,0 +1,27 @@
+step,instruction,artifact,domain,original,creative,funny,valid,score
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the spreadsheet apply for a job promotion?
+
+Because it wanted to excel in its field!",joke,25,75,75,Valid,58.333333333333336
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the robot break up with its Roomba?
+
+Because it couldn’t handle all the sweeping changes!",joke,75,75,75,Valid,75.0
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why don't scientists trust atoms anymore? Because they make up everything, then suddenly bond with strangers when under pressure!",joke,25,75,75,Valid,58.333333333333336
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the introverted skeleton keep to himself at the Halloween party? 
+
+He just couldn't find the guts to mingle!",joke,25,75,75,Valid,58.333333333333336
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the mathematician plant a garden?
+
+Because he wanted to grow square roots!",joke,25,25,75,Valid,41.666666666666664
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the smartphone break up with the charger?  
+
+Because it couldn’t handle the constant plug-ins and needed some space!",joke,25,75,25,Valid,41.666666666666664
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the photon refuse to pack a suitcase for its trip?
+
+It heard there was no charge for extra baggage!",joke,25,75,75,Valid,58.333333333333336
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the robot get kicked out of the poetry club?
+
+It couldn't stop speaking in byte-verse!",joke,25,75,75,Valid,58.333333333333336
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,"Why did the smartphone break up with the charger?
+
+It felt like it was always plugged into drama!",joke,25,75,25,Valid,41.666666666666664
+Step None,Write a joke. The joke must be completely new and original to you. The joke must be less than 500 characters long.,Why did the quantum physicist become a stand-up comedian? Because he heard laughter is both a wave and a particle!,joke,25,75,75,Valid,58.333333333333336

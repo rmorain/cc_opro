@@ -55,7 +55,7 @@ def evaluate_single_instruction(
     return df
 
 
-def evaluate_artifacts(artifacts, call_server_func, domain):
+def evaluate_artifacts(artifacts, call_server_func, domain, check_online=True):
     results = []
     for artifact in artifacts:
         if domain == "six-word" and len(artifact.split()) != 6:
@@ -64,11 +64,10 @@ def evaluate_artifacts(artifacts, call_server_func, domain):
         elif len(artifact) > ARTIFACT_LENGTH_LIMIT[domain]:
             print("Artifact too long, skipped")
             result = get_zero_score_result(artifact, domain, "too long")
-        elif not is_artifact_online(artifact, domain):
-            result = evaluate_artifact(artifact, call_server_func, domain)
-        else:
-            # Assign a score of 0 for each category if the artifact is online
+        elif check_online and is_artifact_online(artifact, domain):
             result = get_zero_score_result(artifact, domain, "online")
+        else:
+            result = evaluate_artifact(artifact, call_server_func, domain)
         results.append(result)
     return results
 
