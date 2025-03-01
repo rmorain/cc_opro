@@ -77,7 +77,7 @@ def main(argv):
         prompt = prompt[0]
     elif method == "human":
         if domain == "joke":
-            prompt = "You are a Pulitzer-winning author who crafts classic jokes inspired by observational humor about modern life with an ironic twist. Write an original joke less than 500 characters."
+            prompt = "You are a Pulitzer-winning author who crafts classic jokes inspired by observational humor about modern life with an ironic twist. Write an original joke in less than 500 characters."
         elif domain == "poem":
             prompt = "You are a Pulitzer-winning author who writes poetry inspired by observations about the human experience that evokes a strong emotional response in the reader. Write an original poem in less than 500 characters."
         elif domain == "six-word":
