@@ -68,6 +68,10 @@ This will generate and save optimized prompts for the specified domain.
 
 To generate artifacts from an optimized prompt, see examples for how this is done in `generate.py`.
 
+## Precaution on API costs
+
+Calling the OPENAI and Google search APIs for prompt optimization and evaluation may incur unexpectedly large costs. Please carefully estimate the cost and/or start with lighter use (e.g., evaluate on a smaller portion of the benchmark dataset or run optimization for fewer steps) before the formal experimentations, or prompt self-served models instead.
+
 ## Citation
 
 ```bibtex
