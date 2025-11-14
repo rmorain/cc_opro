@@ -1,6 +1,5 @@
 import os
 
-import requests
 from googleapiclient.discovery import build
 
 
@@ -17,10 +16,6 @@ results = google_search(
     cse_id=os.environ.get("SEARCH_ID"),
     num=10,
 )
-
-import pudb
-
-pu.db
 
 for result in results:
     print(f"Title: {result['title']}")
